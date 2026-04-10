@@ -34,16 +34,24 @@ $taches = $pdo->query("SELECT * FROM taches");
 
     <div id="affichage">
         <h3>Mes tâches</h3>
-        <div id="liste-taches">
+        <table border="1">
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>Priorité</th>
+                <th>Action</th>
+            </tr>
             <?php foreach($taches as $tache): ?>
-                <div class="tache">
-                    <strong><?= htmlspecialchars($tache['titre']) ?></strong>
-                    - Statut : <span><?= htmlspecialchars($tache['statut']) ?></span>
-                    | Priorité : <?= htmlspecialchars($tache['priorite']) ?>
-                    <a href="supprimer.php?id=<?= $tache['id'] ?>">Supprimer</a>
-                </div>
+            <tr class="tache">
+                <td><?= htmlspecialchars($tache['titre']) ?></td>
+                <td><?= htmlspecialchars($tache['description']) ?></td>
+                <td><span><?= htmlspecialchars($tache['statut']) ?></span></td>
+                <td><?= htmlspecialchars($tache['priorite']) ?></td>
+                <td><a href="supprimer.php?id=<?= $tache['id'] ?>">Supprimer</a></td>
+            </tr>
             <?php endforeach; ?>
-        </div>
+        </table>
     </div>
 
     <script src="script.js"></script>
