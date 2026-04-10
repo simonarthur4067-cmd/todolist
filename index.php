@@ -5,6 +5,7 @@ $taches = $pdo->query("SELECT * FROM taches");
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Ma Todo List</title>
 </head>
