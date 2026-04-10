@@ -1,3 +1,7 @@
+<?php
+require 'connexion.php';
+$taches = $pdo->query("SELECT * FROM taches");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,29 +9,20 @@
     <title>Ma Todo List</title>
 </head>
 <body>
-
     <h1>Gestion de mes tâches</h1>
 
     <div id="formulaire">
         <h3>Nouvelle tâche</h3>
         <form action="ajouter.php" method="POST" onsubmit="return validerFormulaire()">
-            <div>
-                Titre : <input type="text" name="titre">
-            </div>
-            <div>
-                Description : <input type="text" name="description">
-            </div>
-            <div>
-                Priorité : 
-                <select name="priorite">
-                    <option>Basse</option>
-                    <option>Normale</option>
-                    <option>Haute</option>
-                </select>
-            </div>
-            <div>
-                <input type="submit" value="Ajouter la tâche">
-            </div>
+            Titre : <input type="text" name="titre"><br>
+            Description : <input type="text" name="description"><br>
+            Priorité :
+            <select name="priorite">
+                <option>Basse</option>
+                <option>Normale</option>
+                <option>Haute</option>
+            </select><br>
+            <input type="submit" value="Ajouter la tâche">
         </form>
     </div>
 
@@ -39,21 +34,18 @@
 
     <div id="affichage">
         <h3>Mes tâches</h3>
-        
         <div id="liste-taches">
-            <div class="tache">
-                <strong>Réviser le SQL</strong> - Statut : <span>A faire</span> | Priorité : Haute 
-                <a href="supprimer.php?id=1">Supprimer</a>
-            </div>
-
-            <div class="tache">
-                <strong>Projet PHP</strong> - Statut : <span>Termine</span> | Priorité : Basse 
-                <a href="supprimer.php?id=2">Supprimer</a>
-            </div>
+            <?php foreach($taches as $tache): ?>
+                <div class="tache">
+                    <strong><?= htmlspecialchars($tache['titre']) ?></strong>
+                    - Statut : <span><?= htmlspecialchars($tache['statut']) ?></span>
+                    | Priorité : <?= htmlspecialchars($tache['priorite']) ?>
+                    <a href="supprimer.php?id=<?= $tache['id'] ?>">Supprimer</a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
